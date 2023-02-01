@@ -58,6 +58,9 @@ export class TasksService {
     const { status } = updateTaskStatusDto;
 
     const foundIndex = this.tasks.findIndex((task) => task.id === id);
+    if (foundIndex === -1) {
+      throw new NotFoundException(`Task with ID ${id} not found`);
+    }
     this.tasks[foundIndex].status = status;
 
     return this.tasks[foundIndex];

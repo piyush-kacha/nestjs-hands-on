@@ -47,6 +47,52 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+
+## Extra Concepts
+Here are some concepts which used in this project:
+```javascript
+/* findIndex vs indexOf methods.
+All return -1 when no value is found. */
+
+let myArray = [1, 2, 2, 8, 4, 2, 5, 6, 2, 9];
+
+// findIndex(arg => argCondition): return the first index 
+// for which the given function is true.
+myArray.findIndex(x => x > 2); // → 3
+
+// indexOf(value): return the value's first index.
+myArray.indexOf(2); // → 1
+
+// lastIndexOf(value): return the value's last index.
+myArray.lastIndexOf(2); // → 8
+
+// indexOf(value, start): return the value's first index, 
+// starting at the given position.
+myArray.indexOf(2, 3); // → 5
+
+// lastIndexOf(value, stop): return the value's last index, 
+// stopping at the given position.
+myArray.lastIndexOf(2, 3); // → 2
+```
+
+```javascript
+// delete item from array of objects javascript
+const apps = [
+  {id:1, name:'Jon'}, 
+  {id:2, name:'Dave'},
+  {id:3, name:'Joe'}
+]
+
+//remove item with id=2
+const itemToBeRemoved = {id:2, name:'Dave'}
+
+apps.splice(apps.findIndex(a => a.id === itemToBeRemoved.id) , 1)
+
+//print result
+console.log(apps)
+//Run code snippet
+```
+
 ## Stay in touch
 
 - Author - [Piyush Kacha](https://github.com/piyush-kacha)
