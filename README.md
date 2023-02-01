@@ -15,6 +15,27 @@
    ```
    Here is list of all available decorators form GitHub Resource: [class-validator](https://github.com/typestack/class-validator#validation-decorators)
 
+3. Data Persistence - PostgreSQL & Type ORM
+   ```bash
+   # GIT Branch
+   $ git checkout breakpoint/3.postgresql-typeorm
+   ```
+   **Installing PostgreSQL and pgAdmin**
+
+   In this hands-on requires you to have PostgreSQL installed and running.
+
+   We will also use pgAdmin as a tool to view our database. Bellow you can find download links to both. Please download and start both PostgreSQL and pgAdmin.
+
+   1. Installing PostgreSQL:
+      * Windows users: [Windows Installer Download - Official PostgreSQL Website](https://www.postgresql.org/download/windows/)
+      
+      * macOS users: [Postgres.app Downloads (Recommended)](https://postgresapp.com/downloads.html)
+
+   2. Installing pgAdmin:
+      
+      * Windows & macOS: [pgAdmin Download Page](https://www.pgadmin.org/download/)
+
+
 ## Installation
 
 ```bash
