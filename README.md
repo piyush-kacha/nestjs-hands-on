@@ -34,6 +34,12 @@
    2. Installing pgAdmin:
       
       * Windows & macOS: [pgAdmin Download Page](https://www.pgadmin.org/download/)
+   
+   </br>
+   
+   TypeORM Documentation: [https://typeorm.io](https://typeorm.io)
+   </br>
+   TypeORM Entity Explain: [https://github.com/typeorm/typeorm/blob/master/docs/entities.md](https://github.com/typeorm/typeorm/blob/master/docs/entities.md)
 
 
 ## Installation
