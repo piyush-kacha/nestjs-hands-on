@@ -44,6 +44,11 @@
 
       TypeORM Query Builder: [https://github.com/typeorm/typeorm/blob/master/docs/select-query-builder.md](https://github.com/typeorm/typeorm/blob/master/docs/select-query-builder.md)
 
+4. Authentication - Setting up JWT Passport
+   ```bash
+   # GIT Branch
+   $ git checkout breakpoint/4.authentication
+   ```
 
 ## Installation
 
@@ -75,6 +80,19 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Nest CLI Commands 
+
+```bash
+# Generating module
+$ nest g module <module-name>
+
+# Generating controller
+$ nest g controller <module-name> --no-spec
+
+# Generating service
+$ nest g service <module-name> --no-spec
 ```
 
 
