@@ -42,6 +42,9 @@
    TypeORM Entity Explain: [https://github.com/typeorm/typeorm/blob/master/docs/entities.md](https://github.com/typeorm/typeorm/blob/master/docs/entities.md)
 
 
+      TypeORM Query Builder: [https://github.com/typeorm/typeorm/blob/master/docs/select-query-builder.md](https://github.com/typeorm/typeorm/blob/master/docs/select-query-builder.md)
+
+
 ## Installation
 
 ```bash
