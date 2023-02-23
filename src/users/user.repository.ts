@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { AuthCredentialsDto } from '../common/dto/auth-credentials.dto';
@@ -38,6 +38,28 @@ export class UserRepository {
       } else {
         throw new InternalServerErrorException();
       }
+    }
+  }
+
+  async findOne(options: FindOneOptions<User>) {
+    return this.userRepository.findOne(options);
+  }
+
+  async findOneByUsername(username) {
+    const options: FindOneOptions<User> = { where: { username } };
+    return this.findOne(options);
+  }
+
+  async validateUserPassword(authCredentialsDto: AuthCredentialsDto) {
+    const { password, username } = authCredentialsDto;
+
+    const options: FindOneOptions<User> = { where: { username } };
+    const user = await this.findOne(options);
+
+    if (user && (await user.validatePassword(password))) {
+      return username;
+    } else {
+      return null;
     }
   }
 }
