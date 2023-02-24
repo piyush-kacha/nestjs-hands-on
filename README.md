@@ -54,6 +54,11 @@
    # GIT Branch
    $ git checkout breakpoint/5.logging
    ```
+5. Logging
+   ```bash
+   # GIT Branch
+   $ git checkout breakpoint/5.production-configuration
+   ```
 
 ## Installation
 
