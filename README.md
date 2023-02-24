@@ -59,6 +59,11 @@
    # GIT Branch
    $ git checkout breakpoint/5.production-configuration
    ```
+5. Frontend Application
+   ```bash
+   # For try frontend application to clone 
+   $ git clone git@github.com:arielweinberger/task-management-frontend.git
+   ```
 
 ## Installation
 
