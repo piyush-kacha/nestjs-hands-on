@@ -49,6 +49,11 @@
    # GIT Branch
    $ git checkout breakpoint/4.authentication
    ```
+5. Logging
+   ```bash
+   # GIT Branch
+   $ git checkout breakpoint/5.logging
+   ```
 
 ## Installation
 
