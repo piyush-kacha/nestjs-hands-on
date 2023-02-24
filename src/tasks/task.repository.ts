@@ -1,10 +1,11 @@
-import { DeleteResult, FindOneOptions, Repository } from 'typeorm';
+import { DeleteResult, FindOptionsWhere, Repository } from 'typeorm';
 import { Task } from './task.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task-status.enum';
 import { GetTasksFilterDto } from './dto/get-tasks.dto';
+import { User } from '../users/user.entity';
 
 @Injectable()
 export class TaskRepository {
@@ -13,10 +14,10 @@ export class TaskRepository {
     private taskRepository: Repository<Task>,
   ) {}
 
-  async getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
+  async getTasks(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
     const { search, status } = filterDto;
     const query = this.taskRepository.createQueryBuilder('task');
-
+    query.where('task.userId = :userId', { userId: user.id });
     if (status) {
       query.andWhere('task.status = :status', { status });
     }
@@ -32,21 +33,24 @@ export class TaskRepository {
     return tasks;
   }
 
-  findOneById(id: number) {
-    const options: FindOneOptions<Task> = { where: { id } };
-    return this.taskRepository.findOne(options);
+  findOneById(id: number, user: User) {
+    const options: FindOptionsWhere<Task> = { id, userId: user.id };
+    return this.taskRepository.findOneBy(options);
   }
 
-  async create(createTaskDto: CreateTaskDto): Promise<Task> {
+  async create(createTaskDto: CreateTaskDto, user: User): Promise<Task> {
     const { title, description } = createTaskDto;
     const task = new Task();
     task.description = description;
     task.title = title;
     task.status = TaskStatus.OPEN;
-    return this.taskRepository.save(task);
+    task.user = user;
+    await this.taskRepository.save(task);
+    delete task.user;
+    return task;
   }
 
-  async deleteById(id: number): Promise<DeleteResult> {
-    return this.taskRepository.delete(id);
+  async deleteById(id: number, user: User): Promise<DeleteResult> {
+    return this.taskRepository.delete({ id, userId: user.id });
   }
 }
