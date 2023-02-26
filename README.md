@@ -59,10 +59,15 @@
    # GIT Branch
    $ git checkout breakpoint/5.production-configuration
    ```
-5. Frontend Application
+5.1. Frontend Application
    ```bash
    # For try frontend application to clone 
    $ git clone git@github.com:arielweinberger/task-management-frontend.git
+   ```
+5. Testing
+   ```bash
+   # GIT Branch
+   $ git checkout breakpoint/6.testing
    ```
 
 ## Installation
@@ -154,6 +159,73 @@ apps.splice(apps.findIndex(a => a.id === itemToBeRemoved.id) , 1)
 //print result
 console.log(apps)
 //Run code snippet
+```
+
+```typescript
+// example.spec.ts
+
+// feature
+class FriendsList {
+  friends = [];
+
+  addFriend(name) {
+    this.friends.push(name);
+    this.announceFriendship(name);
+  }
+
+  announceFriendship(name) {
+    console.log(`${name} is now a friend!`);
+  }
+
+  removeFriend(name) {
+    const idx = this.friends.indexOf(name);
+
+    if (idx === -1) {
+      throw new Error('Friends not found!');
+    }
+    this.friends.splice(idx, 1);
+  }
+}
+
+// tests
+describe('FriendsList', () => {
+  let friendsList;
+
+  beforeEach(() => {
+    friendsList = new FriendsList();
+  });
+
+  it('initializes friends list', () => {
+    expect(friendsList.friends.length).toEqual(0);
+  });
+
+  it('add a friend to the list', () => {
+    friendsList.addFriend('Piyush');
+    expect(friendsList.friends.length).toEqual(1);
+  });
+
+  it('announces friendship', () => {
+    friendsList.announceFriendship = jest.fn();
+    expect(friendsList.announceFriendship).not.toHaveBeenCalled();
+    friendsList.addFriend('Piyush');
+    expect(friendsList.announceFriendship).toHaveBeenCalled();
+  });
+
+  describe('removeFriend', () => {
+    it('removes a friend from the list', () => {
+      friendsList.addFriend('Piyush');
+      expect(friendsList.friends[0]).toEqual('Piyush');
+      friendsList.removeFriend('Piyush');
+      expect(friendsList.friends[0]).toBeUndefined();
+    });
+
+    it('throws an error as friend does not exist', () => {
+      expect(() => friendsList.removeFriend('Piyush')).toThrow(
+        new Error('Friends not found!'),
+      );
+    });
+  });
+});
 ```
 
 ## Stay in touch
