@@ -64,10 +64,15 @@
    # For try frontend application to clone 
    $ git clone git@github.com:arielweinberger/task-management-frontend.git
    ```
-5. Testing
+6. Testing
    ```bash
    # GIT Branch
    $ git checkout breakpoint/6.testing
+   ```
+7. Swagger
+   ```bash
+   # GIT Branch
+   $ git checkout breakpoint/6.swagger
    ```
 
 ## Installation
