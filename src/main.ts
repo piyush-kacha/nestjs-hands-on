@@ -1,13 +1,16 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
+import { Logger } from 'nestjs-pino';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as config from 'config';
 
 async function bootstrap() {
   const serverConfig = config.get('server');
-  const logger = new Logger('bootstrap');
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
+
+  app.useLogger(app.get(Logger));
 
   const options = new DocumentBuilder()
     .setTitle('API')
@@ -21,6 +24,6 @@ async function bootstrap() {
 
   const port = process.env.PORT || serverConfig.port;
   await app.listen(port);
-  logger.log(`Application listening on port ${port}`);
+  // logger.log(`Application listening on port ${port}`);
 }
 bootstrap();
