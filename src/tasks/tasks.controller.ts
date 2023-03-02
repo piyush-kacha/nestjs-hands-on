@@ -28,11 +28,12 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/decorators/get-user.decorator';
 import { User } from '../users/user.entity';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiBearerAuth()
 @ApiTags('Tasks')
 @Controller('tasks')
-@UseGuards(AuthGuard())
+@UseGuards(JwtAuthGuard)
 export class TasksController {
   private logger = new Logger('TasksController');
   constructor(private tasksService: TasksService) {}
