@@ -1,15 +1,12 @@
 import { DeleteResult, FindOptionsWhere, Repository } from 'typeorm';
 import { Task } from './task.entity';
-import {
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task-status.enum';
 import { GetTasksFilterDto } from './dto/get-tasks.dto';
 import { User } from '../users/user.entity';
+import { InternalServerErrorException } from '../exceptions/internal-server-error.exception';
 
 @Injectable()
 export class TaskRepository {
@@ -38,13 +35,7 @@ export class TaskRepository {
       const tasks = await query.getMany();
       return tasks;
     } catch (err) {
-      this.logger.error(
-        `Failed to get task for user "${
-          user.username
-        }", Filters: ${JSON.stringify(filterDto)}`,
-        err.stack,
-      );
-      throw new InternalServerErrorException();
+      throw InternalServerErrorException.INTERNAL_SERVER_ERROR(err);
     }
   }
 
@@ -70,7 +61,7 @@ export class TaskRepository {
         )}`,
         err.stack,
       );
-      throw new InternalServerErrorException();
+      throw InternalServerErrorException.INTERNAL_SERVER_ERROR(err);
     }
 
     delete task.user;

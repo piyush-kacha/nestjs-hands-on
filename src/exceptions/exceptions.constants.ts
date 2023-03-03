@@ -33,5 +33,6 @@ export class ExceptionConstants {
     NETWORK_ERROR: 30003,
     THIRD_PARTY_SERVICE_ERROR: 30004,
     SERVER_OVERLOAD: 30005,
+    UNEXPECTED_ERROR: 30006,
   };
 }

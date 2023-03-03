@@ -1,13 +1,10 @@
-import {
-  ConflictException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 import { AuthCredentialsDto } from '../common/dto/auth-credentials.dto';
+import { InternalServerErrorException } from 'src/exceptions/internal-server-error.exception';
 
 @Injectable()
 export class UserRepository {
@@ -36,7 +33,7 @@ export class UserRepository {
       if (err.code === '23505') {
         throw new ConflictException('Username already exists');
       } else {
-        throw new InternalServerErrorException();
+        throw InternalServerErrorException.INTERNAL_SERVER_ERROR(err);
       }
     }
   }
