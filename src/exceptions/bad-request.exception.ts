@@ -1,18 +1,13 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-
-interface IBadRequestException {
-  message: string;
-  code?: number;
-  cause?: Error;
-  description?: string;
-}
+import { IException } from './exceptions.interface';
+import { ExceptionConstants } from './exceptions.constants';
 
 export class BadRequestException extends HttpException {
   code: number;
   cause: Error;
   description: string;
   message: string;
-  constructor(exception: IBadRequestException) {
+  constructor(exception: IException) {
     super(exception.message, HttpStatus.BAD_REQUEST, {
       cause: exception.cause,
       description: exception.description,
@@ -26,21 +21,21 @@ export class BadRequestException extends HttpException {
   static HTTP_REQUEST_TIMEOUT = () => {
     return new BadRequestException({
       message: 'HTTP Request Timeout',
-      code: 10001,
+      code: ExceptionConstants.BadRequestCodes.HTTP_REQUEST_TIMEOUT,
     });
   };
 
   static VALIDATION_ERROR = (msg?: string) => {
     return new BadRequestException({
       message: msg || 'Validation Error',
-      code: 10002,
+      code: ExceptionConstants.BadRequestCodes.VALIDATION_ERROR,
     });
   };
 
   static UNEXPECTED = (msg?: string) => {
     return new BadRequestException({
       message: msg || 'Unexpected Error',
-      code: 10003,
+      code: ExceptionConstants.BadRequestCodes.UNEXPECTED_ERROR,
     });
   };
 }

@@ -14,6 +14,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
   catch(exception: any, host: ArgumentsHost): void {
+    this.logger.error(exception);
     // In certain situations `httpAdapter` might not be available in the
     // constructor method, thus we should resolve it here.
     const { httpAdapter } = this.httpAdapterHost;
@@ -26,8 +27,6 @@ export class AllExceptionsFilter implements ExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const request = ctx.getRequest();
-
-    this.logger.error(exception);
 
     const responseBody = {
       statusCode: httpStatus,

@@ -1,15 +1,15 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
-import { BadRequestException } from '../exceptions/bad-request.exception';
+import { UnauthorizedException } from '../exceptions/unauthorized.exception';
 
-@Catch(BadRequestException)
-export class BadRequestExceptionFilter implements ExceptionFilter {
-  private readonly logger = new Logger(BadRequestException.name);
+@Catch(UnauthorizedException)
+export class UnauthorizedExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(UnauthorizedExceptionFilter.name);
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
-  catch(exception: BadRequestException, host: ArgumentsHost): void {
-    this.logger.verbose(exception);
+  catch(exception: UnauthorizedException, host: ArgumentsHost): void {
+    this.logger.warn(exception);
 
     // In certain situations `httpAdapter` might not be available in the
     // constructor method, thus we should resolve it here.

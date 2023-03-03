@@ -10,6 +10,8 @@ import { UsersModule } from './users/users.module';
 import { AllExceptionsFilter } from './filters/all-exception.filter';
 import { AppConfig } from './app.config';
 import { ValidationExceptionFilter } from './filters/validator-exception.filter';
+import { BadRequestExceptionFilter } from './filters/bad-request-exception.filter';
+import { UnauthorizedExceptionFilter } from './filters/unauthorized-exception.filter';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { ValidationExceptionFilter } from './filters/validator-exception.filter'
   providers: [
     { provide: APP_FILTER, useClass: AllExceptionsFilter },
     { provide: APP_FILTER, useClass: ValidationExceptionFilter },
+    { provide: APP_FILTER, useClass: BadRequestExceptionFilter },
+    { provide: APP_FILTER, useClass: UnauthorizedExceptionFilter },
     {
       // Allowing to do validation through DTO
       // Since class-validator library default throw BadRequestException, here we use exceptionFactory to throw
